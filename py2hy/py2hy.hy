@@ -313,11 +313,20 @@
       lineno (int)
       col_offset (int)"
   (setv target #e #k target)
+  ;;(print "ForBody" (hy-repr #A #l #k body))
+  (if (= '[(do)] #A #l #k body)
+  `(lfor ~@#A (if (= ', (first target))
+             [`[~@#A (rest target)]]
+             [target])
+         ~#e #k iter
+         None
+         )
   `(for [~@#A (if (= ', (first target))
              [`[~@#A (rest target)]]
              [target])
          ~#e #k iter]
-     ~@#A #l #k body))
+     ~@#A #l #k body)
+  ))
 
 (defsyntax AsyncFor [target iter body orelse lineno col_offset]
   "Args:
@@ -669,7 +678,8 @@
                             (+ x y)
                             `[(~'unpack_mapping ~(second y))]))
                 (map (fn [l] [(if (get l 0)
-                                (hy.models.HyKeyword (+ ":" (get l 0)))
+                                  ;;(hy.models.HyKeyword (+ ":" (get l 0)))
+                                  (hy.models.HyKeyword (get l 0))
                                 None) (get l 1)])
                      #l #k keywords)
                 []))))

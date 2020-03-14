@@ -7,7 +7,7 @@
 
 
 (defn py2hy [py]
-  (setv x (->> py (ast.parse) (py2hy_) (drop 1) (list)))
+  (setv x (->> py (ast.parse) (py2hy_.py2hy) (drop 1) (list)))
   (if (= 1 (len x))
     (first x)
     x))
