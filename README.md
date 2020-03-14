@@ -1,7 +1,7 @@
 # py2hy
 
-[![Build Status](https://travis-ci.org/woodrush/py2hy.svg?branch=master)](https://travis-ci.org/woodrush/py2hy)
-[![Coverage Status](https://coveralls.io/repos/github/woodrush/py2hy/badge.svg?branch=master)](https://coveralls.io/github/woodrush/py2hy?branch=master)
+[![Build Status](https://travis-ci.org/niitsuma/py2hy.svg?branch=master)](https://travis-ci.org/niitsuma/py2hy)
+[![Coverage Status](https://coveralls.io/repos/github/niitsuma/py2hy/badge.svg?branch=master)](https://coveralls.io/github/niitsuma/py2hy?branch=master)
 
 py2hy is a compiler that compiles Python AST to
 [Hy](https://github.com/hylang/hy).
@@ -14,8 +14,8 @@ Other Working demos are available in [demo/](demo/).
 
 ## Requirements
 
-- Python >= 3.3
-- Hy == 0.13.0
+- Python >= 3.6
+- Hy == 0.18.0
 
 Currently, py2hy is based on Python 3.6's
 [AST specs](https://docs.python.org/3.6/library/ast.html), and most tested in

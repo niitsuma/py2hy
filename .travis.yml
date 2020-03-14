@@ -1,20 +1,11 @@
 language: python
 python:
-  - "3.3"
-  - "3.4"
-  - "3.5"
   - "3.6"
+  - "3.7"  
 sudo: false
 install:
-  - pip install coveralls
-  - pip install --upgrade pytest
   - pip install -r requirements.txt
   - pip install -e .
 script:
-  coverage run --source=py2hy setup.py test
-cache: pip
-after_success:
-  - coveralls
-notifications:
-  email:
-    - woodrush924@gmail.com
+  - nosetests -v tests
+

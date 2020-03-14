@@ -1,13 +1,17 @@
-(import [hy]
-        [ast]
-        [sys]
-        [pytest]
-        [py2hy.py2hy [py2hy :as py2hy_]]
-        [builtins])
+(import hy
+        ast
+        sys
+        pytest
+        [py2hy.py2hy :as py2hy_]
+        ;;[py2hy.py2hy :as py2hy_]
+        builtins)
+
+
+(require [hy015removed.core [*]])
 
 ;; Remove the `do` at the top for simplicity
 (defn py2hy [py]
-  (setv x (->> py (ast.parse) (py2hy_) (drop 1) (list)))
+  (setv x (->> py (ast.parse) (py2hy_.py2hy) (drop 1) (list)))
   (if (= 1 (len x))
     (first x)
     x))

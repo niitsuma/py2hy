@@ -1,7 +1,10 @@
-(import [hy]
-        [ast]
-        [pytest]
-        [py2hy.py2hy [py2hy :as py2hy_]])
+(import hy
+        ast
+        pytest
+        [py2hy.py2hy :as py2hy_ ])
+
+(require [hy015removed.core [*]])
+
 
 (defn py2hy [py]
   (setv x (->> py (ast.parse) (py2hy_) (drop 1) (list)))
@@ -12,7 +15,7 @@
 (defmacro asserteq [x y]
   `(assert (= ~x ~y)))
 
-(defsharp t [f]
+(deftag t [f]
   `#@((pytest.mark.skip :reason "TODO")
      ~f))
 

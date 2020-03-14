@@ -6,56 +6,11 @@
         re
         argparse
         )
-;;[.prettyprinter [prettyprinter]]
-
 ;;(import [py2hy.prettyprinter :as prettyprinter])
-;;(import py2hy.prettyprinter )
-;(import prettyprinter )
+
 (import [hy.contrib.hy-repr [hy-repr]])
 
-
-(defmacro list-comp [el lis &optional test]
-  (lif-not
-    test
-    `(lfor
-       ~(first  lis)
-       ~(second lis)
-       ~el)
-    `(lfor
-       ~(first  lis)
-       ~(second lis)
-       :if ~test       
-       ~el
-       )))
-
-(defmacro set-comp [el lis &optional test]
-  (lif-not
-    test
-    `(sfor
-       ~(first  lis)
-       ~(second lis)
-       ~el)
-    `(sfor
-       ~(first  lis)
-       ~(second lis)
-       :if ~test       
-       ~el
-       )))
-
-
-(defmacro dict-comp [el lis &optional test]
-  (lif-not
-    test
-    `(dfor
-       ~(first  lis)
-       ~(second lis)
-       ~el)
-    `(dfor
-       ~(first  lis)
-       ~(second lis)
-       :if ~test       
-       ~el
-       )))
+(require [hy015removed.core [*]])
 
 ;;; Stable version Hy compatibility
 ;;; For splicing None as an empty list
@@ -486,7 +441,9 @@
       names (alias*) [list]
       lineno (int)
       col_offset (int)"
-  `(import ~@#A #l #k names))
+  ;;`(import ~@#A #l #k names)
+  `(import ~@#* #A #l #k names)
+  )
 
 (defsyntax ImportFrom [module names level lineno col_offset]
   "Args:
@@ -1069,7 +1026,11 @@
   ;;(print "ast1" ast)
   ;;(print "ast2" (ast.expand))
   ;;(print "ast3" (hy-repr (ast.expand)))
-  (print (cut (hy-repr (ast.expand)) 1 None))
+  ;;(print (cut (hy-repr (ast.expand)) 1 None))
+  (print "(require [hy015removed.core [*]])" )
+  (for [p (cut (ast.expand) 1 None)]
+    (print (cut (hy-repr p) 1 None)))
+  
   ;;(prettyprinter.prettyprinter (ast.expand))
   ;;(print (-> ast (.expand) (prettyprinter)))
   )

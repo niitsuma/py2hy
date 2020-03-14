@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="py2hy",
-    version="0.9.1",
+    version="0.9.2",
     description="Python to Hy compiler",
     long_description="""Compiles Python code to Hy.""",
     url="https://github.com/woodrush/py2hy",
@@ -15,10 +15,10 @@ setup(
     keywords="sample setuptools development",
     platforms=['any'],
     python_requires='>=3.6',
-    install_requires = ["hy==0.18.0"],
+    install_requires = ["hy==0.18.0" ,"hy015removed"],
     #packages=find_packages(exclude=["tests","build","tools"]),
-    packages=find_packages(exclude=["tests","old"]),
-    #packages=['py2hy'],
+    #packages=find_packages(exclude=["tests","old"]),
+    packages=['py2hy'],
     package_data={
         "py2hy": ["*.hy"],
     },
