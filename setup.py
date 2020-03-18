@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="py2hy",
-    version="0.9.2",
+    version="0.9.3",
     description="Python to Hy compiler",
     long_description="""Compiles Python code to Hy.""",
     url="https://github.com/woodrush/py2hy",
