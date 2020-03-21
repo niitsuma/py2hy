@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/niitsuma/py2hy.svg?branch=master)](https://travis-ci.org/niitsuma/py2hy)
 [![Coverage Status](https://coveralls.io/repos/github/niitsuma/py2hy/badge.svg?branch=master)](https://coveralls.io/github/niitsuma/py2hy?branch=master)
+[![Version](https://img.shields.io/pypi/v/py2hyb.svg?style=flat-square)](https://pypi.python.org/pypi/py2hyb)
+
 
 py2hy is a compiler that compiles Python AST to
 [Hy](https://github.com/hylang/hy).
@@ -10,6 +12,11 @@ py2hy was used to create [HyHy](https://github.com/woodrush/hy/tree/hyhy),
 the Hy language rewritten entirely in Hy.
 
 Other Working demos are available in [demo/](demo/). 
+
+## Install
+```bash
+pip3 install py2hyb --user
+```
 
 
 ## Requirements
