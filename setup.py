@@ -4,13 +4,13 @@ from setuptools import setup, find_packages
 #subprocess.call(['make', 'compilehy'])
 
 setup(
-    name="py2hy",
-    version="0.9.3",
+    name="py2hyb",
+    version="0.9.5",
     description="Python to Hy compiler",
     long_description="""Compiles Python code to Hy.""",
-    url="https://github.com/woodrush/py2hy",
+    url="https://github.com/niitsuma/py2hy",
     author="Hikaru Ikuta",
-    author_email="woodrush924@gmail.com",
+    author_email="hirotaka.niitsuma@gmail.com",
     license="LGPL-3",
     keywords="sample setuptools development",
     platforms=['any'],
@@ -18,9 +18,9 @@ setup(
     install_requires = ["hy==0.18.0" ,"hy015removed"],
     #packages=find_packages(exclude=["tests","build","tools"]),
     #packages=find_packages(exclude=["tests","old"]),
-    packages=['py2hy'],
+    packages=['py2hyb'],
     package_data={
-        "py2hy": ["*.hy"],
+        "py2hyb": ["*.hy"],
     },
     test_suite='nose.collector',
     tests_require=['nose'],
@@ -41,10 +41,10 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "py2hy=py2hy.py2hy:main",
+            "py2hy=py2hyb.py2hy:main",
         ],
     },
-    scripts = [
-        'scripts/py2hy.sh'
-    ]
+    # scripts = [
+    #     'scripts/py2hy.sh'
+    # ]
 )

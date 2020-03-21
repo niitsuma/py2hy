@@ -6,11 +6,73 @@
         re
         argparse
         )
-;;(import [py2hy.prettyprinter :as prettyprinter])
 
 (import [hy.contrib.hy-repr [hy-repr]])
 
 (require [hy015removed.core [*]])
+
+(defn hy-p-repr [sexp]
+  (defn indent-lv [st i] 
+    (setv sbst (cut st 0 i))
+    (-  (sbst.count "(" )  (sbst.count ")"  1)))
+    
+  ;;(print "hy-p-repr start")
+  (setv names
+      [
+       "defclass"
+       "defn"
+       "except"
+       "while"
+       "when"
+       "for"
+       "if"
+       "with-decorator"
+       "try"
+       "do"
+       "cond"
+       "with-"
+       ]
+      )
+  (setv st (hy-repr sexp))
+  (setv indent 0)
+  (setv indent_del 4)
+  (setv i 0)
+  ;;(setv startflag True)
+  (for [nm names ]
+    (while True
+    ;;(print nm)
+      (setv stsub (cut st i None))
+      (setv matchObj (re.search (+ "\(\s*" nm) stsub))
+      (lif-not
+        matchObj (break)
+        (do
+          (setv j (+ i (matchObj.start)))
+          (setv k (+ i (matchObj.end)))
+          ;;(print "match" i j nm (matchObj.group))
+          (if (< j 2)
+              (do
+                (setv
+                  i k
+                  ;;indent (+ indent indent_del)
+                  )
+              )
+              (do
+                (setv
+                  ;;instr (+ "\n" (* " " indent))
+                  instr (+ "\n" (* " " (indent-lv st k)))
+                  st (+ (cut st None j)
+                       instr
+                       (cut st j None))
+                 i (+ k (len instr) )
+                 ;;indent (+ indent indent_del)
+                 )))))
+      )
+    (setv i 0)
+    )
+  ;;(print st)
+  st
+  )
+
 
 ;;; Stable version Hy compatibility
 ;;; For splicing None as an empty list
@@ -315,12 +377,17 @@
   (setv target #e #k target)
   ;;(print "ForBody" (hy-repr #A #l #k body))
   (if (= '[(do)] #A #l #k body)
-  `(lfor ~@#A (if (= ', (first target))
+  `(for [~@#A (if (= ', (first target))
              [`[~@#A (rest target)]]
              [target])
-         ~#e #k iter
-         None
-         )
+         ~#e #k iter]
+     None)
+  ;; `(for ~@#A (if (= ', (first target))
+  ;;            [`[~@#A (rest target)]]
+  ;;            [target])
+  ;;        ~#e #k iter
+  ;;        None
+  ;;        )
   `(for [~@#A (if (= ', (first target))
              [`[~@#A (rest target)]]
              [target])
@@ -1039,14 +1106,14 @@
   ;;(print (cut (hy-repr (ast.expand)) 1 None))
   (print "(require [hy015removed.core [*]])" )
   (for [p (cut (ast.expand) 1 None)]
-    (print (cut (hy-repr p) 1 None)))
-  
+    ;;(print (cut (hy-repr p) 1 None))
+    (print (cut (hy-p-repr p) 1 None))
+    )
   ;;(prettyprinter.prettyprinter (ast.expand))
   ;;(print (-> ast (.expand) (prettyprinter)))
   )
 
 (defn py2hy_file [filepath &optional [dumpast False]]
-  ;;(print "filepath" filepath)
   (setv astobj (-> filepath (open "r") (.read) (ast.parse)))
   (if dumpast
       (do
